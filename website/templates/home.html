@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %}
+
+{% block content %}
+<br />
+<h1 align="center">Welcome back, {{ user.first_name }}!</h1>
+<br />
+<h1 align="center">TODO List</h1>
+<br />
+<ul class="list-group list-group-flush" id="tasks">
+    <h4>Your ongoing tasks:</h4>
+    {% for task in user.tasks %}
+    <li class="list-group-item">
+        {{ task.data }}
+        <button type="button" class="close" onClick="deleteTask({{ task.id }})">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </li>
+    {% endfor %}
+</ul>
+<form method="POST">
+    <br />
+    <textarea name="task" id="task" placeholder="Add new task here..." class="form-control"></textarea>
+    <br />
+    <div align="center">
+        <button type="submit" class="btn btn-primary">Add Task</button>
+    </div>
+</form>
+{% endblock %}
