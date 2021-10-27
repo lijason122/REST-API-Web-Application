@@ -14,11 +14,13 @@ def create_app():
 
     from .views import views
     from .auth import auth
+    from .weather_app import weather_app
 
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
+    app.register_blueprint(weather_app, url_prefix='/')
 
-    from .models import User, Task
+    from .models import User, Task, City
 
     create_database(app)
 
