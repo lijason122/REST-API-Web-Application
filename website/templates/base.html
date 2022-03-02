@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
-
+    <link rel="stylesheet" href="..\static\style.css" />
     <title>{% block title %}Home{% endblock %}</title>
 </head>
 
@@ -19,6 +19,7 @@
             <div class="navbar-nav">
                 {% if user.is_authenticated %}
                 <a class="nav-item nav-link" id="home" href="/">Home</a>
+                <a class="nav-item nav-link" id="words" href="/words_search">Dictionary</a>
                 <a class="nav-item nav-link" id="weather" href="/weather">Weather</a>
                 <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
                 {% else %}
@@ -38,14 +39,14 @@
     {% if messages %}
         {% for category, message in messages %}
         {% if category == 'error' %}
-        <div class="alert alert-danger alter-dismissable fade show" role="alert">
+        <div class="alert alert-danger alter-dismissable fade show" role="alert" id="message">
             {{ message }}
             <button type="button" class="close" data-dismiss="alert">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
         {% else %}
-        <div class="alert alert-success alter-dismissable fade show" role="alert">
+        <div class="alert alert-success alter-dismissable fade show" role="alert" id="message">
             {{ message }}
             <button type="button" class="close" data-dismiss="alert">
                 <span aria-hidden="true">&times;</span>
@@ -72,6 +73,11 @@
     <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+        setTimeout(function() {
+            $('#message').fadeOut('slow');
+        }, 1500); // 1.5 second
+    </script>
 </body>
 
 </html>

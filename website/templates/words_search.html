@@ -1,0 +1,42 @@
+{% extends "base.html" %} {% block title %}Words{% endblock %}
+
+{% block content %}
+<br/>
+<h1 align="center">What word do you want to look up?</h1>
+<br/>
+<div align="center"><input autocomplete="off" autofocus placeholder="Search for a word" type="text"></div>
+<br/>
+<ul></ul>
+
+<script>
+    let input = document.querySelector('input');
+    input.addEventListener('input', async function() {
+        let html = '';
+        if (input.value) {
+            let response = await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + input.value);
+            if (response.status == 200) {
+                data = await response.json()
+                for (let id in data) {
+                    let word = data[id]['word']
+                    let speech = data[id]['meanings'][0]['partOfSpeech']
+                    let definition = data[id]['meanings'][0]['definitions'][0]['definition']
+                    
+                    html += '<li>' + word + ' (' + speech + '): ' + definition + '</li>';
+                    
+                }
+            }
+            else {
+                html += '<li>' + 'No Definitions Found' + '</li>';
+            }
+            
+            document.querySelector('ul').innerHTML = html;
+        }
+        else {
+            document.querySelector('ul').innerHTML = '';
+        }
+        
+        
+    });
+</script>
+
+{% endblock %}

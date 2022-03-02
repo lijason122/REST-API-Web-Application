@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from .models import Task
 from . import db
 import json
+import requests
 
 views = Blueprint('views', __name__)
 
@@ -34,3 +35,7 @@ def delete_task():
             flash('Task deleted!', category='success')
 
     return jsonify({})
+
+@views.route('/words_search', methods=['GET'])
+def words_search():
+    return render_template("words_search.html", user=current_user)

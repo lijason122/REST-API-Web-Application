@@ -4,13 +4,12 @@
 <br />
 <h1 align="center">Welcome back, {{ user.first_name }}!</h1>
 <br />
-<h1 align="center">TODO List</h1>
-<br />
 <ul class="list-group list-group-flush" id="tasks">
-    <h4>Your ongoing tasks:</h4>
+    <h2 align="center">You have {{ user.tasks | length }} ongoing tasks:</h2>
+    <h4>Task added as of: </h4>
     {% for task in user.tasks %}
-    <li class="list-group-item">
-        {{ task.data }}
+    <li class="list-group-item" id="fade-in">
+        <h6>{{ task.date.strftime("%B %d, %Y") }}</h6> {{ task.data }}
         <button type="button" class="close" onClick="deleteTask({{ task.id }})">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -26,3 +25,8 @@
     </div>
 </form>
 {% endblock %}
+<script>
+    setTimeout(function() {
+        $('#fade-in').fadeIn('fast');
+    }, 3000); // 3 seconds
+</script>
