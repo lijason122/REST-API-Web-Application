@@ -9,18 +9,17 @@ DB_NAME = "database.db"
 def create_app():
     app = Flask(__name__) # Refers the name of the current file
     app.config['SECRET_KEY'] = 'my first web'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     db.init_app(app)
 
     from .views import views
     from .auth import auth
-    from .weather_app import weather_app
 
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
-    app.register_blueprint(weather_app, url_prefix='/')
 
-    from .models import User, Task, City
+    from .models import User
 
     create_database(app)
 

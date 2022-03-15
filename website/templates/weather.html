@@ -69,7 +69,7 @@
                                 </div>
                             </div>
                             <div class="media-right">
-                                <a href="{{ url_for('weather_app.delete_city', name=weather.city) }}">
+                                <a href="{{ url_for('views.delete_city', name=weather.city) }}">
                                     <button class="delete"></button>
                                 </a>
                             </div>
@@ -84,7 +84,7 @@
         setInterval(function()
         {
             $('#rt').load(document.URL +  ' #rt');
-        }, 500)
+        }, 1000)
     
     </script>
     {% endblock %}

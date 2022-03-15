@@ -13,8 +13,9 @@
     input.addEventListener('input', async function() {
         let html = '';
         if (input.value) {
-            let response = await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + input.value);
-            if (response.status == 200) {
+            try {
+                let response = await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + input.value);
+            
                 data = await response.json()
                 for (let id in data) {
                     let word = data[id]['word']
@@ -25,7 +26,7 @@
                     
                 }
             }
-            else {
+            catch {
                 html += '<li>' + 'No Definitions Found' + '</li>';
             }
             
