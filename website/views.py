@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, flash, jsonify, redirect,
 from flask_login import login_required, current_user
 from .models import Task, City
 from . import db
+from . import config
 import json
 import datetime
 import requests
@@ -42,7 +43,7 @@ def words_search():
     return render_template("words_search.html", user=current_user)
 
 def get_weather_data(city):
-    url = f'http://api.openweathermap.org/data/2.5/weather?q={ city }&units=metric&appid=611704fdbfc4115106a7f01d8ffd396a'
+    url = f'http://api.openweathermap.org/data/2.5/weather?q={ city }&units=metric&appid={ config.access_token }'
     r = requests.get(url).json()
     return r
 
