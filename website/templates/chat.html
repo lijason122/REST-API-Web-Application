@@ -1,1 +1,39 @@
 {% extends "base.html" %} {% block title %}Chat{% endblock %}
+{% block content %}
+<br />
+<h1 align="center">Group Chat Room</h1>
+<br />
+<p id="chatBody" >
+    <input type="text" id="myMessage" autofocus>
+    <button id="sendbutton">Send</button>
+</p>
+<br />
+<ul id="messages">
+    {% for msg in messages %}
+        <ul>{{ msg.message }}</ul>
+    {% endfor %}
+</ul>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+    
+        var socket = io.connect('http://127.0.0.1:5000');
+    
+        socket.on('connect', function() {
+            socket.send('[{{ user.first_name }} joined the chat!]');
+        });
+
+        socket.on('message', function(msg) {
+            $("#messages").append('<ul>'+msg+'</ul>');
+            console.log('Received message');
+        });
+    
+        $('#sendbutton').on('click', function() {
+            socket.send('[{{ user.first_name }}] : ' + $('#myMessage').val());
+            $('#myMessage').val('');
+        });
+
+    });
+</script>
+
+{% endblock %}

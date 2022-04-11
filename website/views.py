@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
 from flask_login import login_required, current_user
-from .models import Task, City
+from .models import Task, City, History
 from . import db
 from . import config
 import json
@@ -109,3 +109,11 @@ def delete_city(name):
 
     flash(f'Successfully deleted { city.name }', 'success')
     return redirect(url_for('views.index_get'))
+
+
+@views.route('/chat', methods=['GET'])
+def chat():
+    # db.session.query(History).delete()
+    # db.session.commit()
+    # messages = History.query.all()
+    return render_template("chat.html", user=current_user)

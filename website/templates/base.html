@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
     <link rel="stylesheet" href="..\static\style.css" />
+    <script type="text/javascript" src="https://cdn.socket.io/4.4.1/socket.io.min.js" integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>{% block title %}Home{% endblock %}</title>
 </head>
 
@@ -21,6 +23,7 @@
                 <a class="nav-item nav-link" id="home" href="/">Home</a>
                 <a class="nav-item nav-link" id="words" href="/words_search">Dictionary</a>
                 <a class="nav-item nav-link" id="weather" href="/weather">Weather</a>
+                <a class="nav-item nav-link" id="chat" href="/chat">Chat</a>
                 <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
                 {% else %}
                 <a class="nav-item nav-link" id="login" href="/login">Login</a>
@@ -73,6 +76,7 @@
     <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
     <script>
         setTimeout(function() {
             $('#message').fadeOut('slow');

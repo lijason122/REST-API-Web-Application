@@ -6,7 +6,12 @@
     position: absolute;
    } */
 
-ul {
+#definitionBody, #chatBody {
    display: table;
    margin: 0 auto;
-   }
+   list-style: none;
+}
+
+#messages {
+   list-style: none;
+}
